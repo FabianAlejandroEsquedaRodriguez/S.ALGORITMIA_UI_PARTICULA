@@ -83,3 +83,5 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
         print(ubicacion)#imprime una tupla con 2 valores
                         #La primera posision [0] es la ubicacion, con el nombre del archivo y la extension
                         #la segunda posicion [1], nos va a decir que filtro se eligió (JSON)
+        
+        self.contenedor_particulas.guardar(ubicacion)
