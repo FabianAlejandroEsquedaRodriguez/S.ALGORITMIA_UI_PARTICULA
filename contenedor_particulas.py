@@ -1,4 +1,5 @@
 from particula import Particula
+import json
 
 class Contenedor_particulas:
     def __init__(self):
@@ -23,7 +24,14 @@ class Contenedor_particulas:
     def guardar(self, ubicacion):#Es la ubicacion que va a recibir desde nuestra interfaz grafica
         #Abre el archivo en una ubicacion y lo abre en modo de lectura
         with open(ubicacion, 'w') as archivo:
-            archivo.write(str(self))
+            #lista de diccionarios de tipo particula
+            #Cada particula que se saque de la lista de particulas, se va a guardar en la lista, va a tener que llamar al metodo to_dict()
+            #Lo que se va a guardar va a ser un conjunto de diccionarios
+            lista = [particula.to_dict() for particula in self.__particulas]
+            print(lista)
+
+            #Vamos a serializar objetos de tipo particula, para poderlos guardar en un archivo con formato json
+            json.dump(lista, archivo, indent=5)#Se manda la lista y el archivo en el que se va a guardar
 
 
 #Pruebas sin leer datos directamente desde el teclado(Fuera de la clase)
