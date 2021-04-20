@@ -18,6 +18,10 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
         self.ui.agregar_final_pushButton.clicked.connect(self.click_agregar_final)
         self.ui.agregar_inicio_pushButton.clicked.connect(self.click_agregar_inicio)
         self.ui.mostrar_pushButton.clicked.connect(self.click_mostrar)
+        
+        #Conetar las señales con sus slots
+        self.ui.actionAbrir.triggered.connect(self.action_abrir_archivo)
+        self.ui.actionGuardar.triggered.connect(self.action_guardar_archivo)
 
 
     @Slot()
@@ -58,4 +62,13 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
     def click_mostrar(self):
         self.ui.salida.clear()#Limpiar la info. cada que se presiona el boton
         self.ui.salida.insertPlainText(str(self.contenedor_particulas))
+
+    #Metodos a conectar con las acciones de Abrir y Guardar, en la interfaz
+    @Slot()
+    def action_abrir_archivo(self):
+        print("abrir_archivo")
+
+    @Slot()
+    def action_guardar_archivo(self):
+        print("guardar_archivo")
         
