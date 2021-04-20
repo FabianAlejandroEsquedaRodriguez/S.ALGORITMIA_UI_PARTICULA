@@ -1,4 +1,4 @@
-from PySide2.QtWidgets import QMainWindow, QFileDialog
+from PySide2.QtWidgets import QMainWindow, QFileDialog, QMessageBox
 from PySide2.QtCore import Slot
 from ui_mainwindow import Ui_MainWindow
 from contenedor_particulas import Contenedor_particulas
@@ -84,4 +84,18 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
                         #La primera posision [0] es la ubicacion, con el nombre del archivo y la extension
                         #la segunda posicion [1], nos va a decir que filtro se eligió (JSON)
         
-        self.contenedor_particulas.guardar(ubicacion)
+        #Validar si fue posible guardar en esa posicion el archivo
+        if self.contenedor_particulas.guardar(ubicacion):
+            QMessageBox.information(
+                self,#Desde donde se ejecuta esa ventana
+                "Éxito",#Nombre de la ventana
+                "Se pudo crear el archivo " + ubicacion#Mensaje en la ventana
+
+            )
+        #En caso de que no haya sido posible guardar el archivo
+        else:
+            QMessageBox.critical(
+                self,
+                "Error",
+                "No se pudo crear el archivo" + ubicacion
+            )
