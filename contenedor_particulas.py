@@ -20,6 +20,11 @@ class Contenedor_particulas:
             str(particulas) + '\n' for particulas in self.__particulas #Va sacando cada particula de la lista
         )
 
+    def guardar(self, ubicacion):#Es la ubicacion que va a recibir desde nuestra interfaz grafica
+        #Abre el archivo en una ubicacion y lo abre en modo de lectura
+        with open(ubicacion, 'w') as archivo:
+            archivo.write(str(self))
+
 
 #Pruebas sin leer datos directamente desde el teclado(Fuera de la clase)
 
