@@ -1,4 +1,4 @@
-from PySide2.QtWidgets import QMainWindow
+from PySide2.QtWidgets import QMainWindow, QFileDialog
 from PySide2.QtCore import Slot
 from ui_mainwindow import Ui_MainWindow
 from contenedor_particulas import Contenedor_particulas
@@ -70,5 +70,16 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
 
     @Slot()
     def action_guardar_archivo(self):
-        print("guardar_archivo")
-        
+        # print("guardar_archivo")
+
+        #El metodo regresa una ubicacion de donde esta el archivo
+        ubicacion = QFileDialog.getSaveFileName(
+            self,#Ese dialogo se va a mandar desde esta ventana
+            'Guardar Archivo',#Titulo para la ventana de dialogo
+            '.',#Desde que directorio se va a abrir el dialogo (con el punto, indica que se va a abrir desde donde se este 
+                #corriendo el ejecutable, en este caso, desde la carpeta del proyecto, o lugar)
+            'JSON (*.json)'#Extension que va a llevar el archivo
+        )[0]#Que solo me regrese lo que hay en la posicion 0
+        print(ubicacion)#imprime una tupla con 2 valores
+                        #La primera posision [0] es la ubicacion, con el nombre del archivo y la extension
+                        #la segunda posicion [1], nos va a decir que filtro se eligió (JSON)
