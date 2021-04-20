@@ -22,16 +22,21 @@ class Contenedor_particulas:
         )
 
     def guardar(self, ubicacion):#Es la ubicacion que va a recibir desde nuestra interfaz grafica
-        #Abre el archivo en una ubicacion y lo abre en modo de lectura
-        with open(ubicacion, 'w') as archivo:
-            #lista de diccionarios de tipo particula
-            #Cada particula que se saque de la lista de particulas, se va a guardar en la lista, va a tener que llamar al metodo to_dict()
-            #Lo que se va a guardar va a ser un conjunto de diccionarios
-            lista = [particula.to_dict() for particula in self.__particulas]
-            print(lista)
+        try:#Valida si es posible crear un archivo
+            #Abre el archivo en una ubicacion y lo abre en modo de lectura
+            with open(ubicacion, 'w') as archivo:
+                #lista de diccionarios de tipo particula
+                #Cada particula que se saque de la lista de particulas, se va a guardar en la lista, va a tener que llamar al metodo to_dict()
+                #Lo que se va a guardar va a ser un conjunto de diccionarios
+                lista = [particula.to_dict() for particula in self.__particulas]
+                print(lista)
 
-            #Vamos a serializar objetos de tipo particula, para poderlos guardar en un archivo con formato json
-            json.dump(lista, archivo, indent=5)#Se manda la lista y el archivo en el que se va a guardar
+                #Vamos a serializar objetos de tipo particula, para poderlos guardar en un archivo con formato json
+                json.dump(lista, archivo, indent=5)#Se manda la lista y el archivo en el que se va a guardar
+
+                return 1#Si se pudo hacer
+        except:
+            return 0#Hubo un error al ejecutar el with open()
 
 
 #Pruebas sin leer datos directamente desde el teclado(Fuera de la clase)
