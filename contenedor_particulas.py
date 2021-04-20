@@ -38,7 +38,22 @@ class Contenedor_particulas:
         except:
             return 0#Hubo un error al ejecutar el with open()
 
+    def abrir(self, ubicacion):
+        try:
+            #Se abre el archivo en modo de lectura, en la ubicacion recibida
+            with open(ubicacion, 'r') as archivo:
+                lista = json.load(archivo)#Leer archivos json y devolvernos la informacion, en una lista de diccionarios
+                
+                #Cada diccionario se tiene que ir convirtiendo a una particula
+                self.__particulas = [Particula(**particula)for particula in lista]#Borra las particulas que ya tiene para cargar los del archivo
+                                                                                #Crear una Particula, usando la informacion que tiene cada particula
+                                                #Con los dos asteriscos, le decimos que a las llaves y valores en el .json, los convierta a parametros de la 
+                                                #clase particula
+            return 1
+        except:
+            return 0
 
+                
 #Pruebas sin leer datos directamente desde el teclado(Fuera de la clase)
 
 # particula1 = Particula(id=1111, origen_x=2, origen_y=3, destino_x=5, destino_y=7,
