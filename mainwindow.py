@@ -66,7 +66,26 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
     #Metodos a conectar con las acciones de Abrir y Guardar, en la interfaz
     @Slot()
     def action_abrir_archivo(self):
-        print("abrir_archivo")
+        # print("abrir_archivo")
+        #obtener la informacion para crear el dialogo, para que el usuario elija el archivo que quiera abrir
+        ubicacion = QFileDialog.getOpenFileName(
+            self,#Desde donde se va a lanzar la ventana
+            'Abrir Archivo',#El nombre de la ventana de dialogo
+            '.',#Desde donde se va a abrir el dialogo para seleccionar el archivo
+            'JSON (*.json)'#El filtro, para poder elegir los archivos que seand e tipo json
+        )[0]#Nos regresa la ubcacion del archivo
+        if self.contenedor_particulas.abrir(ubicacion):
+            QMessageBox.information(
+                self,
+                "Éxito",
+                "Se abrió el archivo " + ubicacion
+            )
+        else:
+            QMessageBox.critical(
+                self,
+                "Error",
+                "Error al abrir el archivo " + ubicacion
+            )
 
     @Slot()
     def action_guardar_archivo(self):
