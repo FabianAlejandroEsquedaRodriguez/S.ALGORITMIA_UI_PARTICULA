@@ -140,6 +140,7 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
            # print(particula)#La particula es imprimible gracias al __str__() de la clase particula
 
             #Cada atributo debe ser un Item, para poder meterlos a la tabla(construir los widgets)
+            #convertirlos a strings porque son enteros
             id_widget = QTableWidgetItem(str(particula.id))
             origen_x_widget = QTableWidgetItem(str(particula.origen_x))
             origen_y_widget = QTableWidgetItem(str(particula.origen_y))
