@@ -25,6 +25,7 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
 
         #Conectar las señales a sus slots
         self.ui.mostrar_tabla_pushButton.clicked.connect(self.mostrar_tabla)
+        self.ui.buscar_pushButton.clicked.connect(self.buscar_id)
 
 
     @Slot()
@@ -165,4 +166,56 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
             self.ui.tabla.setItem(row, 9, distancia_widget)
 
             row += 1#para que vaya pasando a la siguiente fila
+
+    @Slot()
+    def buscar_id(self):
+        # print("buscar")
+        id = self.ui.buscar_lineEdit.text()#obtener la informacion introducida en el lineEdit
+        encontrado = False#bandera
+
+        for particula in self.contenedor_particulas:
+            if id == particula.id:#Si el id introducido en el lineEdit es igual al de la particula
+                #Limpiar la tabla, si se encuentra la particula 
+                # (Si hay info. en la tabla, la limpia e inserta la encontrada)
+                self.ui.tabla.clear()
+                self.ui.tabla.setRowCount(1)#la tabla va a tener una sola fila
+
+                #insertar la particula en la tabla
+                #Cada atributo debe ser un Item, para poder meterlos a la tabla(construir los widgets)
+                #convertirlos a strings porque son enteros
+                id_widget = QTableWidgetItem(str(particula.id))
+                origen_x_widget = QTableWidgetItem(str(particula.origen_x))
+                origen_y_widget = QTableWidgetItem(str(particula.origen_y))
+                destino_x_widget = QTableWidgetItem(str(particula.destino_x))
+                destino_y_widget = QTableWidgetItem(str(particula.destino_y))
+                velocidad_widget = QTableWidgetItem(str(particula.velocidad))
+                red_widget = QTableWidgetItem(str(particula.red))
+                green_widget = QTableWidgetItem(str(particula.green))
+                blue_widget = QTableWidgetItem(str(particula.blue))
+                distancia_widget = QTableWidgetItem(str(particula.distancia))
+
+                #Meter los items en cada columna que le corresponde
+                self.ui.tabla.setItem(0, 0, id_widget)
+                self.ui.tabla.setItem(0, 1, origen_x_widget)
+                self.ui.tabla.setItem(0, 2, origen_y_widget)
+                self.ui.tabla.setItem(0, 3, destino_x_widget)
+                self.ui.tabla.setItem(0, 4, destino_y_widget)
+                self.ui.tabla.setItem(0, 5, velocidad_widget)
+                self.ui.tabla.setItem(0, 6, red_widget)
+                self.ui.tabla.setItem(0, 7, green_widget)
+                self.ui.tabla.setItem(0, 8, blue_widget)
+                self.ui.tabla.setItem(0, 9, distancia_widget)
+
+                #Si encontro la particula
+                encontrado = True
+
+                return#Para que no siga buscando
+
+        if not encontrado:
+            QMessageBox.warning(
+                self,
+                "Atención",#Nombre de la advertencia
+                f'La particula con el ID "{id}", no fue encontrado'#f -> formato y "{variable}", podemos poner variables
+                                                                #externas en los strings
+            )
 
