@@ -20,6 +20,24 @@ class Contenedor_particulas:
         return "".join(
             str(particulas) + '\n' for particulas in self.__particulas #Va sacando cada particula de la lista
         )
+    
+    #Metodo para hacer una clase iterable y que vaya retornando elementos
+    def __iter__(self):
+        self.cont = 0#Iicializar el acceso a la lista de particulas
+
+        return self#Retorna la clase o el objeto
+    
+    #Metodo que retorna lo que hay en la siguiente posicion
+    def __next__(self):
+        if self.cont < len(self.__particulas):#Si el cont es menos al tamaño de la lista de particulas
+            particula = self.__particulas[self.cont]
+            self.cont += 1
+            return particula
+        else:
+            raise StopIteration#lanzar una exepcion
+
+    def __len__(self):#Retorna la longitud de la lista de particulas
+        return len(self.__particulas)
 
     def guardar(self, ubicacion):#Es la ubicacion que va a recibir desde nuestra interfaz grafica
         try:#Valida si es posible crear un archivo
