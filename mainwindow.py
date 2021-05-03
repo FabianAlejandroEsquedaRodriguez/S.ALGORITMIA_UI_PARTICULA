@@ -1,4 +1,4 @@
-from PySide2.QtWidgets import QMainWindow, QFileDialog, QMessageBox, QTableWidgetItem
+from PySide2.QtWidgets import QMainWindow, QFileDialog, QMessageBox, QTableWidgetItem, QGraphicsScene
 from PySide2.QtCore import Slot
 from ui_mainwindow import Ui_MainWindow
 from contenedor_particulas import Contenedor_particulas
@@ -31,7 +31,9 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
         self.ui.dibujar.clicked.connect(self.dibujar)
         self.ui.limpiar.clicked.connect(self.limpiar)
 
-
+        #Crear la escena, despues de haber conectaro
+        self.scene = QGraphicsScene()#Es como si fuera un visualizador de dibujos
+        self.ui.graphicsView.setScene(self.scene)#En el graphicsView, se inserta la escena creada
 
     @Slot()
     def click_agregar_final(self):
