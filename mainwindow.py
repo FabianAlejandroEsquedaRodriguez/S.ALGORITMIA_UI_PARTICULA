@@ -239,28 +239,29 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
         pen = QPen()#crear una pluma, que esta definida en la clase QPen
         pen.setWidth(2)#Tamaño/anchura de la pluma
 
-        for i in range(0, 100):#Va a dibujar 100 particulas, una en cada iteracion
+        for particula in self.contenedor_particulas:#Va a dibujar 100 particulas, una en cada iteracion
             #Ponerle color a la puma
-            r = randint(0, 255)#Generar un color de manera aleatoria
-            g = randint(0, 255)#entre 0 y 255
-            b = randint(0, 255)
+            r = particula.red#randint(0, 255)#Generar un color de manera aleatoria
+            g = particula.green#randint(0, 255)#entre 0 y 255
+            b = particula.blue#randint(0, 255)
 
             color = QColor(r, g, b)
 
             pen.setColor(color)#Asignarle el color a la variable pluma
 
             #Generar posiciones de origen y destino de manera aleatoria
-            origen_x = randint(0, 500)
-            origen_y = randint(0, 500)
-            destino_x = randint(0, 500)
-            destino_y = randint(0, 500)
+            origen_x = particula.origen_x#randint(0, 500)
+            origen_y = particula.origen_y#randint(0, 500)
+            destino_x = particula.destino_x#randint(0, 500)
+            destino_y = particula.destino_y#randint(0, 500)
 
             self.scene.addEllipse(origen_x, origen_y, 3, 3, pen)#En que posicion se va a dibujar (x,y) y el radio (3,3) y la pluma
             self.scene.addEllipse(destino_x, destino_y, 3, 3, pen)#En que posicion se va a dibujar (x,y) y el radio (3,3) y la pluma
             
             #Para dibujar una linea para conectar los 2 puntos
-            self.scene.addLine(origen_x+3, origen_y+3, destino_x, destino_y, pen)#Origen en 'x','y' y destino en 'x','y', 
-                                                        #el +3 es para dibujar la linea un poco mas abajo 
+            self.scene.addLine(origen_x+3, origen_y+3,
+                                destino_x, destino_y, pen)#Origen en 'x','y' y destino en 'x','y', 
+                                                                                #el +3 es para dibujar la linea un poco mas abajo 
 
     @Slot()
     def limpiar(self):
