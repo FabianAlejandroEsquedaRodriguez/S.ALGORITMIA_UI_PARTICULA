@@ -27,6 +27,11 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
         self.ui.mostrar_tabla_pushButton.clicked.connect(self.mostrar_tabla)
         self.ui.buscar_pushButton.clicked.connect(self.buscar_id)
 
+        #Conectar las señales con sus slots
+        self.ui.dibujar.clicked.connect(self.dibujar)
+        self.ui.limpiar.clicked.connect(self.limpiar)
+
+
 
     @Slot()
     def click_agregar_final(self):
@@ -219,3 +224,10 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
                                                                 #externas en los strings
             )
 
+    @Slot()
+    def dibujar(self):
+        print("Dibujar")
+
+    @Slot()
+    def limpiar(self):
+        print("limpiar")
