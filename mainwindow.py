@@ -228,6 +228,12 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
                                                                 #externas en los strings
             )
 
+    def wheelEvent(self, event):#Detecta el evento de la ruedita del mouse para hacer zoom a la escena
+        if event.delta() > 0:#Para hecer zoom in
+            self.ui.graphicsView.scale(1.2, 1.2)#1.2 en x, y
+        else:#Para hacer el zoom out
+            self.ui.graphicsView.scale(0.8, 0.8)#0.8 en x, y
+
     @Slot()
     def dibujar(self):
         pen = QPen()#crear una pluma, que esta definida en la clase QPen
