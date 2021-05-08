@@ -208,6 +208,18 @@ class Ui_MainWindow(object):
         self.gridLayout_5.addWidget(self.limpiar, 1, 1, 1, 1)
 
         self.tabWidget.addTab(self.tab_3, "")
+        self.tab_4 = QWidget()
+        self.tab_4.setObjectName(u"tab_4")
+        self.ordenar_distancia_pushButton_2 = QPushButton(self.tab_4)
+        self.ordenar_distancia_pushButton_2.setObjectName(u"ordenar_distancia_pushButton_2")
+        self.ordenar_distancia_pushButton_2.setGeometry(QRect(310, 20, 281, 171))
+        self.ordenar_id_pushButton = QPushButton(self.tab_4)
+        self.ordenar_id_pushButton.setObjectName(u"ordenar_id_pushButton")
+        self.ordenar_id_pushButton.setGeometry(QRect(10, 20, 281, 171))
+        self.ordenar_velocidad_pushButton_3 = QPushButton(self.tab_4)
+        self.ordenar_velocidad_pushButton_3.setObjectName(u"ordenar_velocidad_pushButton_3")
+        self.ordenar_velocidad_pushButton_3.setGeometry(QRect(9, 218, 581, 161))
+        self.tabWidget.addTab(self.tab_4, "")
 
         self.gridLayout_3.addWidget(self.tabWidget, 0, 0, 1, 1)
 
@@ -266,6 +278,10 @@ class Ui_MainWindow(object):
         self.dibujar.setText(QCoreApplication.translate("MainWindow", u"Dibujar", None))
         self.limpiar.setText(QCoreApplication.translate("MainWindow", u"Limpiar", None))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_3), QCoreApplication.translate("MainWindow", u"Dibujar", None))
+        self.ordenar_distancia_pushButton_2.setText(QCoreApplication.translate("MainWindow", u"DISTANCIA (DESCENDENTE)", None))
+        self.ordenar_id_pushButton.setText(QCoreApplication.translate("MainWindow", u"ID (ASENDENTE)", None))
+        self.ordenar_velocidad_pushButton_3.setText(QCoreApplication.translate("MainWindow", u"VELOCIDAD (ASCENDENTE)", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab_4), QCoreApplication.translate("MainWindow", u"Ordenar", None))
         self.menuArchivo.setTitle(QCoreApplication.translate("MainWindow", u"Archivo", None))
     # retranslateUi
 
