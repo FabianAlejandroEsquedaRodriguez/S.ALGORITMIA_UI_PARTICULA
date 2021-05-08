@@ -243,6 +243,50 @@
         </item>
        </layout>
       </widget>
+      <widget class="QWidget" name="tab_4">
+       <attribute name="title">
+        <string>Ordenar</string>
+       </attribute>
+       <widget class="QPushButton" name="ordenar_distancia_pushButton_2">
+        <property name="geometry">
+         <rect>
+          <x>310</x>
+          <y>20</y>
+          <width>281</width>
+          <height>171</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>DISTANCIA (DESCENDENTE)</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="ordenar_id_pushButton">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>20</y>
+          <width>281</width>
+          <height>171</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>ID (ASENDENTE)</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="ordenar_velocidad_pushButton_3">
+        <property name="geometry">
+         <rect>
+          <x>9</x>
+          <y>218</y>
+          <width>581</width>
+          <height>161</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>VELOCIDAD (ASCENDENTE)</string>
+        </property>
+       </widget>
+      </widget>
      </widget>
     </item>
    </layout>
