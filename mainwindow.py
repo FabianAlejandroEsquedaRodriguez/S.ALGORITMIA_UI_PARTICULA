@@ -37,6 +37,12 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
         self.scene = QGraphicsScene()#Es como si fuera un visualizador de dibujos
         self.ui.graphicsView.setScene(self.scene)#En el graphicsView, se inserta la escena creada
 
+        #conectar los botones a sus metodos
+        self.ui.ordenar_id_pushButton.clicked.connect(self.ordenar_id)
+        self.ui.ordenar_distancia_pushButton_2.clicked.connect(self.ordenar_distancia)
+        self.ui.ordenar_velocidad_pushButton_3.clicked.connect(self.ordenar_velocidad)
+    
+
     @Slot()
     def click_agregar_final(self):
         id = self.ui.ID_lineEdit.text()
@@ -266,3 +272,16 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
     @Slot()
     def limpiar(self):
         self.scene.clear()
+
+
+    @Slot()
+    def ordenar_id(self):#Manda a llamar un metodo que se encuentra en la clase administradora
+        self.contenedor_particulas.ordenar_ID()
+
+    @Slot()
+    def ordenar_distancia(self):#Manda a llamar un metodo que se encuentra en la clase administradora
+        self.contenedor_particulas.ordenar_DISTANCIA()
+
+    @Slot()
+    def ordenar_velocidad(self):#Manda a llamar un metodo que se encuentra en la clase administradora
+        self.contenedor_particulas.ordenar_VELOCIDAD()
