@@ -71,14 +71,15 @@ class Contenedor_particulas:
         except:
             return 0
 
+    #En cada metodo se vuelven a convertir a enteros y flotantes para que haga bien la comparacion 
     def ordenar_ID(self):#Sirve para ordenar las particulas en orden ascendente (ID)
-        self.__particulas.sort(key=lambda particulas:particulas.id)
+        self.__particulas.sort(key=lambda particulas:int(particulas.id))
 
     def ordenar_DISTANCIA(self):#Sirve para ordenar las particulas en orden descendente (Distancia)
-        self.__particulas.sort(key=lambda particulas:particulas.distancia, reverse=True)
+        self.__particulas.sort(key=lambda particulas:float(particulas.distancia), reverse=True)
 
-    def ordenar_VELOCIDAD(self):#Sirve para ordenar las particulas en orden descendente (Velocidad)
-        self.__particulas.sort(key=lambda particulas:particulas.velocidad)
+    def ordenar_VELOCIDAD(self):#Sirve para ordenar las particulas en orden ascendente (Velocidad)
+        self.__particulas.sort(key= lambda particulas:int(particulas.velocidad))
 
                 
 #Pruebas sin leer datos directamente desde el teclado(Fuera de la clase)
