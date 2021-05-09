@@ -71,6 +71,15 @@ class Contenedor_particulas:
         except:
             return 0
 
+    def ordenar_ID(self):#Sirve para ordenar las particulas en orden ascendente (ID)
+        self.__particulas.sort(key=lambda particulas:particulas.id)
+
+    def ordenar_DISTANCIA(self):#Sirve para ordenar las particulas en orden descendente (Distancia)
+        self.__particulas.sort(key=lambda particulas:particulas.distancia, reverse=True)
+
+    def ordenar_VELOCIDAD(self):#Sirve para ordenar las particulas en orden descendente (Velocidad)
+        self.__particulas.sort(key=lambda particulas:particulas.velocidad)
+
                 
 #Pruebas sin leer datos directamente desde el teclado(Fuera de la clase)
 
