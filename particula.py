@@ -21,7 +21,7 @@ class Particula:
             'ORIGEN Y: ' + str(self.__origen_y) + '\n' +
             'DESTINO X: ' + str(self.__destino_x) + '\n' +
             'DESTINO Y: ' + str(self.__destino_y) + '\n' +
-            'VELOCIDAD: ' +str(self.velocidad) + '\n' +
+            'VELOCIDAD: ' +str(self.__velocidad) + '\n' +
             'RED: ' + str(self.__red) + '\n' +
             'GREEN: ' + str(self.__green) + '\n' +
             'BLUE: ' + str(self.__blue) + '\n' +
