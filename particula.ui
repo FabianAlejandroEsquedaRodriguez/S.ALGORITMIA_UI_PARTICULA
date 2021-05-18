@@ -285,7 +285,7 @@
          <string>Salida</string>
         </property>
        </widget>
-       <widget class="QPlainTextEdit" name="plainTextEdit">
+       <widget class="QPlainTextEdit" name="salida_grafo">
         <property name="geometry">
          <rect>
           <x>10</x>
