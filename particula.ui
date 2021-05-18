@@ -223,25 +223,78 @@
        <attribute name="title">
         <string>Dibujar</string>
        </attribute>
-       <layout class="QGridLayout" name="gridLayout_5">
-        <item row="0" column="0" colspan="2">
-         <widget class="QGraphicsView" name="graphicsView"/>
-        </item>
-        <item row="1" column="0">
-         <widget class="QPushButton" name="dibujar">
-          <property name="text">
-           <string>Dibujar</string>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QPushButton" name="limpiar">
-          <property name="text">
-           <string>Limpiar</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
+       <widget class="QGraphicsView" name="graphicsView">
+        <property name="geometry">
+         <rect>
+          <x>195</x>
+          <y>30</y>
+          <width>401</width>
+          <height>351</height>
+         </rect>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="dibujar">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>290</y>
+          <width>171</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Dibujar</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="limpiar">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>320</y>
+          <width>171</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Limpiar</string>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="dibujar_grafo_pushButton">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>350</y>
+          <width>171</width>
+          <height>23</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Grafo</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_11">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>10</y>
+          <width>47</width>
+          <height>13</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Salida</string>
+        </property>
+       </widget>
+       <widget class="QPlainTextEdit" name="plainTextEdit">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>30</y>
+          <width>171</width>
+          <height>251</height>
+         </rect>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="tab_4">
        <attribute name="title">
