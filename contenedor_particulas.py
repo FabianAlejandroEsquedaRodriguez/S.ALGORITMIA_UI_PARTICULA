@@ -1,5 +1,6 @@
 from particula import Particula
 import json
+from pprint import pprint, pformat
 
 class Contenedor_particulas:
     def __init__(self):
@@ -80,6 +81,36 @@ class Contenedor_particulas:
 
     def ordenar_VELOCIDAD(self):#Sirve para ordenar las particulas en orden ascendente (Velocidad)
         self.__particulas.sort(key= lambda particulas:int(particulas.velocidad))
+
+    #Metodo para dibujar el grafo
+    def Diccionario(self):
+        grafo = dict()
+
+        for particula in self.__particulas:
+            # grafo[(particula.origen_x, particula.origen_y)] = [(particula.destino_x, particula.destino_y, int(particula.distancia))]
+            # grafo[(particula.destino_x, particula.destino_y)] = [(particula.origen_x, particula.origen_y, int(particula.distancia))]
+
+            arista_origen = (particula.destino_x, particula.destino_y, int(particula.distancia))
+            arista_destino = (particula.origen_x, particula.origen_y, int(particula.distancia))
+
+            key_origen = (particula.origen_x, particula.origen_y)
+            key_destino = (particula.destino_x, particula.destino_y)
+
+            if key_origen in grafo:
+                grafo[(particula.origen_x, particula.origen_y)].append(arista_origen)
+            else:
+                grafo[(particula.origen_x, particula.origen_y)] = [arista_origen]
+            
+            if key_destino in grafo:
+                grafo[(particula.destino_x, particula.destino_y)].append(arista_destino)
+            else:
+                grafo[(particula.destino_x, particula.destino_y)] = [arista_destino]
+        
+        
+        str = pformat(grafo, width=40, indent=1)
+        print(str)
+
+        return str
 
                 
 #Pruebas sin leer datos directamente desde el teclado(Fuera de la clase)
