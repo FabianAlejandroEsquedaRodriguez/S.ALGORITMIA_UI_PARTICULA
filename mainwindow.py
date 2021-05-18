@@ -41,6 +41,9 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
         self.ui.ordenar_id_pushButton.clicked.connect(self.ordenar_id)
         self.ui.ordenar_distancia_pushButton_2.clicked.connect(self.ordenar_distancia)
         self.ui.ordenar_velocidad_pushButton_3.clicked.connect(self.ordenar_velocidad)
+
+        #Conectar los botones con sus metodos
+        self.ui.dibujar_grafo_pushButton.clicked.connect(self.dibujar_grafo)
     
 
     @Slot()
@@ -285,3 +288,10 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
     @Slot()
     def ordenar_velocidad(self):#Manda a llamar un metodo que se encuentra en la clase administradora
         self.contenedor_particulas.ordenar_VELOCIDAD()
+
+    @Slot()
+    def dibujar_grafo(self):
+        self.ui.salida_grafo.clear()
+        texto = self.contenedor_particulas.Diccionario()
+        self.ui.salida_grafo.insertPlainText(texto)
+        self.dibujar()
