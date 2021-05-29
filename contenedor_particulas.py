@@ -140,20 +140,28 @@ class Contenedor_particulas:
 
         return grafo
 
-        
+    #Metodo para realizar el recorrido por profundidad en el grafo
+    def RecorreProfundidad(self, grafo, x, y):
+        visitados = []
+        pila = []
+        recorrridoProfundidad = []
+
+        key = (x, y)
+
+        if (key in grafo):
+            visitados.append(key)
+            pila.append(key)
+
+            while (len(pila) > 0):
+                vertice = pila[-1]#Acceder al tope de la pila
+                recorrridoProfundidad.append(vertice)
+                pila.pop()
+
+                for ady in grafo[vertice]:#Por cada adyacente en el vertice
+                    if not ady in visitados:
+                        visitados.append(ady)
+                        pila.append(ady)
+
+        return recorrridoProfundidad
                 
-#Pruebas sin leer datos directamente desde el teclado(Fuera de la clase)
-
-# particula1 = Particula(id=1111, origen_x=2, origen_y=3, destino_x=5, destino_y=7,
-#                         velocidad=500, red=4, green=8, blue=12)
-
-# particula2 = Particula(id=2222, origen_x=4, origen_y=6, destino_x=10, destino_y=14,
-#                         velocidad=1000, red=8, green=16, blue=24)
-
-# contenedor = Contenedor_particulas()
-
-# contenedor.agregar_final(particula1)
-# contenedor.agregar_inicio(particula2)
-# contenedor.agregar_final(particula2)
-
-# contenedor.mostrar()
+        
