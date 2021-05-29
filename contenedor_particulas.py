@@ -189,4 +189,22 @@ class Contenedor_particulas:
 
         return recorrridoAmplitud
 
-    
+    def recorridoP(self, o_x, o_y):
+        recorrerGrafo = Contenedor_particulas.DiccionarioRecorridos(self)
+        recorridoP = Contenedor_particulas.RecorreProfundidad(self, recorrerGrafo, o_x, o_y)
+
+        print("Recorrido en Profundidad: ")
+        str = pformat(recorridoP, width=35, indent=1)
+        print(str)
+
+        return str
+
+    def recorridoA(self, o_x, o_y):
+        recorrerGrafo = Contenedor_particulas.DiccionarioRecorridos(self)
+        recorridoA = Contenedor_particulas.RecorreAmplitud(self, recorrerGrafo, o_x, o_y)
+
+        print("Recorrido en Profundidad: ")
+        str = pformat(recorridoA, width=35, indent=1)
+        print(str)
+
+        return str
