@@ -164,4 +164,29 @@ class Contenedor_particulas:
 
         return recorrridoProfundidad
                 
-        
+    #Metodo para realizar el recorrido por amplitud en el grafo
+    def RecorreAmplitud(self, grafo, x, y):
+
+        visitados = []
+        cola = []
+        recorrridoAmplitud = []
+
+        key = (x, y)
+
+        if (key in grafo):
+            visitados.append(key)
+            cola.append(key)   
+
+            while (len(cola) > 0):
+                vertice = cola[0]#Acceder al inicio de la cola
+                recorrridoAmplitud.append(vertice)
+                del cola[0]#Desencolar
+
+                for ady in grafo[vertice]:#Por cada adyacente en el vertice
+                    if not ady in visitados:
+                        visitados.append(ady)
+                        cola.append(ady)
+
+        return recorrridoAmplitud
+
+    
