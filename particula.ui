@@ -416,7 +416,7 @@
     <property name="title">
      <string>Recorridos</string>
     </property>
-    <addaction name="actionAnchura_Profundidad"/>
+    <addaction name="actionAmplitud_Profundidad"/>
    </widget>
    <addaction name="menuArchivo"/>
    <addaction name="menuRecorridos"/>
@@ -438,9 +438,9 @@
     <string>Ctrl+S</string>
    </property>
   </action>
-  <action name="actionAnchura_Profundidad">
+  <action name="actionAmplitud_Profundidad">
    <property name="text">
-    <string>Busqueda en Anchura/Profundidad</string>
+    <string>Busqueda en Amplitud/Profundidad</string>
    </property>
    <property name="shortcut">
     <string>Ctrl+B</string>
