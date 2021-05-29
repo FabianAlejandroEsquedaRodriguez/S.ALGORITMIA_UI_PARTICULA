@@ -43,7 +43,10 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
         self.ui.ordenar_velocidad_pushButton_3.clicked.connect(self.ordenar_velocidad)
 
         #Conectar los botones con sus metodos
-        self.ui.dibujar_grafo_pushButton.clicked.connect(self.dibujar_grafo)
+        self.ui.mostrar_grafo_pushButton.clicked.connect(self.dibujar_grafo)
+
+        #Conectar la señal para su metodo de recorrido en anchura/profundidad
+        self.ui.actionAmplitud_Profundidad.triggered.connect(self.recorrido_amplitud_profundidad)
     
 
     @Slot()
@@ -292,6 +295,23 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
     @Slot()
     def dibujar_grafo(self):
         self.ui.salida_grafo.clear()
+
         texto = self.contenedor_particulas.Diccionario()
         self.ui.salida_grafo.insertPlainText(texto)
+        
         self.dibujar()
+
+    @Slot()
+    def recorrido_amplitud_profundidad(self):
+        self.ui.salida_grafo.clear()
+
+        origen_x = self.ui.orig_x_spinBox.value()
+        origen_y = self.ui.orig_y_spinBox.value()
+
+        recorridoP = self.contenedor_particulas.recorridoP(origen_x, origen_y)
+        self.ui.salida_grafo.insertPlainText("RECORRIDO EN PROFUNDIDAD\n\n")
+        self.ui.salida_grafo.insertPlainText(recorridoP)
+
+        recorridoA = self.contenedor_particulas.recorridoA(origen_x, origen_y)
+        self.ui.salida_grafo.insertPlainText("\n\n\nRECORRIDO EN AMPLITUD\n\n")
+        self.ui.salida_grafo.insertPlainText(recorridoA)
