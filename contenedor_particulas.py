@@ -112,6 +112,35 @@ class Contenedor_particulas:
 
         return str
 
+    #Metodo para poder hacer el recorrido para los grafos
+    def DiccionarioRecorridos(self):
+        grafo = dict()
+
+        for particula in self.__particulas:
+
+            arista_origen = (particula.destino_x, particula.destino_y)
+            arista_destino = (particula.origen_x, particula.origen_y)
+
+            key_origen = (particula.origen_x, particula.origen_y)
+            key_destino = (particula.destino_x, particula.destino_y)
+
+            if key_origen in grafo:
+                grafo[(particula.origen_x, particula.origen_y)].append(arista_origen)
+            else:
+                grafo[(particula.origen_x, particula.origen_y)] = [arista_origen]
+
+            if key_destino in grafo:
+                grafo[(particula.destino_x, particula.destino_y)].append(arista_destino)
+            else:
+                grafo[(particula.destino_x, particula.destino_y)] = [arista_destino]
+
+
+        # str = pformat(grafo, width=40, indent=1)
+        # print(str)
+
+        return grafo
+
+        
                 
 #Pruebas sin leer datos directamente desde el teclado(Fuera de la clase)
 
