@@ -1,6 +1,7 @@
 from particula import Particula
 import json
 from pprint import pprint, pformat
+from queue import PriorityQueue
 
 class Contenedor_particulas:
     def __init__(self):
@@ -202,6 +203,80 @@ class Contenedor_particulas:
 
         print("Recorrido en Profundidad: ")
         str = pformat(recorridoA, width=35, indent=1)
+        print(str)
+
+        return str
+
+    def recorridoPrim(self, grafo, or_x, or_y):
+        listaVisitados = [] #Lista de visitados
+        grafoResultante = {} #Grafo resultante
+        colaP = PriorityQueue()#Esta es la lista ordenada
+
+        #Elegir un nodo inicial
+        nodoInicial = (or_x, or_y)
+        #Meter el nodo inicial a la lista de visitados
+        listaVisitados.append(nodoInicial)
+        
+        # colaP.put(nodoInicial)
+        if nodoInicial in grafo:
+            # #Agregar los adyacentes del nodo incial a la cola de prioridad
+            for adyacentes in grafo[nodoInicial]:#Por cada adyacente en el nodo inicial
+                orig = nodoInicial
+                destino = (adyacentes[0], adyacentes[1])#Toma el destino x,y en la tupla del adyacente
+                distancia = (adyacentes[2])#Toma la distancia en el adyacente en la tupla del adyacente
+                
+                conexion = (orig, destino)#Ver donde se hace el enlace origen -> destino
+                arista = (distancia, conexion)#Arista (distancia, (origen, destino))
+
+                colaP.put(arista)
+
+            # #Mientras la cola de prioridad no este vacia
+            while not colaP.empty():
+                arista = colaP.get()#Para obtener la arista con el menor peso/distancia
+                # print("Sale de la cola: ", arista)
+                
+                distMinima = arista[0]#Distancia minima en la posicion 0 de la tupla (arista)
+                x = arista[1]#La tupla en la posicion 1 en la arista (origen, destino)
+                origReal = x[0]#Origen
+                destReal = x[1]#Destino
+
+                nuevaArista = (destReal, distMinima)
+                reciproco = (origReal, distMinima)
+
+                if not destReal in listaVisitados:#Si el destino real no esta en la lista de visitados
+                    listaVisitados.append(destReal)#Agregarlo a la lista
+
+                    for adyac in grafo[destReal]:#Por cada adyacente en el grafo
+                        origen2 = destReal
+                        destino2 = (adyac[0], adyac[1])
+                        distancia2 = (adyac[2])
+                        
+                        conexion2 = (origen2, destino2)#Ver donde se hace el enlace origen -> destino
+                        arista2 = (distancia2, conexion2)
+
+                        colaP.put(arista2)
+
+                    if origReal in grafoResultante:
+                        grafoResultante[origReal].append(nuevaArista)#Se agrega el valor de la nueva arista a
+                                                                    # la key en el grafo resultante
+                    else:
+                        grafoResultante[origReal] = [nuevaArista]#Se asigna el valor de la nueva arista a la key
+                    
+                    if destReal in grafoResultante:
+                        grafoResultante[destReal].append(reciproco)
+                    else:
+                        grafoResultante[destReal] = [reciproco]
+        else:
+            grafo[0] = 0
+
+        return grafoResultante
+
+    def PRIM(self, x, y):
+        grafoR = Contenedor_particulas.Diccionario(self)
+        prim = Contenedor_particulas.recorridoPrim(self, grafoR, x, y)
+
+        print("\nRecorrido de PRIM\n")
+        str = pformat(prim, width=40, indent=1)
         print(str)
 
         return str
