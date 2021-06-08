@@ -24,6 +24,8 @@ class Ui_MainWindow(object):
         self.actionGuardar.setObjectName(u"actionGuardar")
         self.actionAmplitud_Profundidad = QAction(MainWindow)
         self.actionAmplitud_Profundidad.setObjectName(u"actionAmplitud_Profundidad")
+        self.actionPrim = QAction(MainWindow)
+        self.actionPrim.setObjectName(u"actionPrim")
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.gridLayout_3 = QGridLayout(self.centralwidget)
@@ -258,6 +260,7 @@ class Ui_MainWindow(object):
         self.menuArchivo.addAction(self.actionAbrir)
         self.menuArchivo.addAction(self.actionGuardar)
         self.menuRecorridos.addAction(self.actionAmplitud_Profundidad)
+        self.menuRecorridos.addAction(self.actionPrim)
 
         self.retranslateUi(MainWindow)
 
@@ -280,6 +283,10 @@ class Ui_MainWindow(object):
         self.actionAmplitud_Profundidad.setText(QCoreApplication.translate("MainWindow", u"Busqueda en Amplitud/Profundidad", None))
 #if QT_CONFIG(shortcut)
         self.actionAmplitud_Profundidad.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+B", None))
+#endif // QT_CONFIG(shortcut)
+        self.actionPrim.setText(QCoreApplication.translate("MainWindow", u"Prim", None))
+#if QT_CONFIG(shortcut)
+        self.actionPrim.setShortcut(QCoreApplication.translate("MainWindow", u"Ctrl+P", None))
 #endif // QT_CONFIG(shortcut)
         self.groupBox.setTitle(QCoreApplication.translate("MainWindow", u"PARTICULA", None))
         self.label_6.setText(QCoreApplication.translate("MainWindow", u"VELOCIDAD:", None))
