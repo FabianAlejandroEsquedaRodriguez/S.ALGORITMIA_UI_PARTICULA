@@ -1,3 +1,4 @@
+from pprint import pformat
 from PySide2.QtWidgets import QMainWindow, QFileDialog, QMessageBox, QTableWidgetItem, QGraphicsScene
 from PySide2.QtGui import QPen, QColor, QTransform
 from PySide2.QtCore import Slot
@@ -47,6 +48,9 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
 
         #Conectar la señal para su metodo de recorrido en anchura/profundidad
         self.ui.actionAmplitud_Profundidad.triggered.connect(self.recorrido_amplitud_profundidad)
+
+        #Conectar la señal para su metodo de recorrido con el algoritmo de Prim
+        self.ui.actionPrim.triggered.connect(self.recorridoPrim)
     
 
     @Slot()
@@ -297,7 +301,9 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
         self.ui.salida_grafo.clear()
 
         texto = self.contenedor_particulas.Diccionario()
-        self.ui.salida_grafo.insertPlainText(texto)
+
+        str = pformat(texto, width=40, indent=1)
+        self.ui.salida_grafo.insertPlainText(str)
         
         self.dibujar()
 
@@ -315,3 +321,7 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
         recorridoA = self.contenedor_particulas.recorridoA(origen_x, origen_y)
         self.ui.salida_grafo.insertPlainText("\n\n\nRECORRIDO EN AMPLITUD\n\n")
         self.ui.salida_grafo.insertPlainText(recorridoA)
+
+    @Slot()
+    def recorridoPrim(self):
+        pass
