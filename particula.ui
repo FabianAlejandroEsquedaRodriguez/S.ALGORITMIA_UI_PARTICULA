@@ -417,6 +417,7 @@
      <string>Recorridos</string>
     </property>
     <addaction name="actionAmplitud_Profundidad"/>
+    <addaction name="actionPrim"/>
    </widget>
    <addaction name="menuArchivo"/>
    <addaction name="menuRecorridos"/>
@@ -444,6 +445,14 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+B</string>
+   </property>
+  </action>
+  <action name="actionPrim">
+   <property name="text">
+    <string>Prim</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
    </property>
   </action>
  </widget>
