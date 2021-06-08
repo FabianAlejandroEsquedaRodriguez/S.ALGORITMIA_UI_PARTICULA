@@ -110,7 +110,7 @@ class Contenedor_particulas:
         str = pformat(grafo, width=40, indent=1)
         print(str)
 
-        return str
+        return grafo
 
     #Metodo para poder hacer el recorrido para los grafos
     def DiccionarioRecorridos(self):
@@ -134,9 +134,6 @@ class Contenedor_particulas:
             else:
                 grafo[(particula.destino_x, particula.destino_y)] = [arista_destino]
 
-
-        # str = pformat(grafo, width=40, indent=1)
-        # print(str)
 
         return grafo
 
