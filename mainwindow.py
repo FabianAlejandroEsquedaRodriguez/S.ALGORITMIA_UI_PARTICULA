@@ -1,6 +1,7 @@
+from math import dist
 from pprint import pformat
 from PySide2.QtWidgets import QMainWindow, QFileDialog, QMessageBox, QTableWidgetItem, QGraphicsScene
-from PySide2.QtGui import QPen, QColor, QTransform
+from PySide2.QtGui import QPen, QColor, QTransform, qBlue, qRed, qRgb
 from PySide2.QtCore import Slot
 from random import randint
 from ui_mainwindow import Ui_MainWindow
@@ -255,7 +256,7 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
         pen = QPen()#crear una pluma, que esta definida en la clase QPen
         pen.setWidth(2)#Tamaño/anchura de la pluma
 
-        for particula in self.contenedor_particulas:#Va a dibujar 100 particulas, una en cada iteracion
+        for particula in self.contenedor_particulas:
             #Ponerle color a la puma
             r = particula.red#randint(0, 255)#Generar un color de manera aleatoria
             g = particula.green#randint(0, 255)#entre 0 y 255
@@ -265,7 +266,7 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
 
             pen.setColor(color)#Asignarle el color a la variable pluma
 
-            #Generar posiciones de origen y destino de manera aleatoria
+            #Posiciones de origen y destino 
             origen_x = particula.origen_x#randint(0, 500)
             origen_y = particula.origen_y#randint(0, 500)
             destino_x = particula.destino_x#randint(0, 500)
@@ -277,12 +278,11 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
             #Para dibujar una linea para conectar los 2 puntos
             self.scene.addLine(origen_x+3, origen_y+3,
                                 destino_x, destino_y, pen)#Origen en 'x','y' y destino en 'x','y', 
-                                                                                #el +3 es para dibujar la linea un poco mas abajo 
+                                                            #el +3 es para dibujar la linea un poco mas abajo 
 
     @Slot()
     def limpiar(self):
         self.scene.clear()
-
 
     @Slot()
     def ordenar_id(self):#Manda a llamar un metodo que se encuentra en la clase administradora
@@ -324,4 +324,42 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
 
     @Slot()
     def recorridoPrim(self):
-        pass
+        pen = QPen()#crear una pluma, que esta definida en la clase QPen
+        pen.setWidth(2)#Tamaño/anchura de la pluma
+
+        self.ui.salida_grafo.clear()
+
+        origen_x = self.ui.orig_x_spinBox.value()
+        origen_y = self.ui.orig_y_spinBox.value()
+
+        expansionMinPrim = self.contenedor_particulas.PRIM(origen_x, origen_y)
+        str = pformat(expansionMinPrim, width=40, indent=1)
+
+        self.ui.salida_grafo.insertPlainText("RECORRIDO -> ALGORITMO DE PRIM\n\n")
+        self.ui.salida_grafo.insertPlainText(str)
+        
+        #Para dibujar el grafo
+        key = (origen_x, origen_y)
+
+        for key in expansionMinPrim.keys():
+            orig_x = key[0]
+            orig_y = key[1]
+            # print('\n',orig_x, orig_y)
+
+            for valor in expansionMinPrim[key]:
+                destino = valor[0]
+                destino_x = destino[0]
+                destino_y = destino[1]
+                # print(destino)
+
+                color = QColor("pink")
+                pen.setColor(color)#Asignarle el color a la variable pluma    
+
+                self.scene.addEllipse(orig_x, orig_y, 3, 3, pen)#En que posicion se va a dibujar (x,y) y el radio (3,3) y la pluma
+                self.scene.addEllipse(destino_x, destino_y, 3, 3, pen)#En que posicion se va a dibujar (x,y) y el radio (3,3) y la pluma
+                
+                # #Para dibujar una linea para conectar los 2 puntos
+                self.scene.addLine(orig_x+3, orig_y+3,
+                                    destino_x, destino_y, pen)#Origen en 'x','y' y destino en 'x','y', 
+                                                        #el +3 es para dibujar la linea un poco mas abajo
+
