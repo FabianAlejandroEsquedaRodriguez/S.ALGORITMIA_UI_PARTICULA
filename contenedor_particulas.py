@@ -111,7 +111,7 @@ class Contenedor_particulas:
         str = pformat(grafo, width=40, indent=1)
         print(str)
 
-        return grafo
+        return str
 
     #Metodo para poder hacer el recorrido para los grafos
     def DiccionarioRecorridos(self):
@@ -276,7 +276,7 @@ class Contenedor_particulas:
         prim = Contenedor_particulas.recorridoPrim(self, grafoR, x, y)
 
         print("\nRecorrido de PRIM\n")
-        str = pformat(prim, width=40, indent=1)
-        print(str)
+        pprint(prim, width=40, indent=1)
 
-        return str
+        return prim
+            
