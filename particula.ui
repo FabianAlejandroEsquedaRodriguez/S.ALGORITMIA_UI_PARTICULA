@@ -326,7 +326,7 @@
          </rect>
         </property>
         <property name="text">
-         <string>Salida para el grafo:</string>
+         <string>Salida para los grafos:</string>
         </property>
        </widget>
        <widget class="QPlainTextEdit" name="salida_grafo">
@@ -418,6 +418,7 @@
     </property>
     <addaction name="actionAmplitud_Profundidad"/>
     <addaction name="actionPrim"/>
+    <addaction name="actionKruskal"/>
    </widget>
    <addaction name="menuArchivo"/>
    <addaction name="menuRecorridos"/>
@@ -453,6 +454,14 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+P</string>
+   </property>
+  </action>
+  <action name="actionKruskal">
+   <property name="text">
+    <string>Kruskal</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+K</string>
    </property>
   </action>
  </widget>
