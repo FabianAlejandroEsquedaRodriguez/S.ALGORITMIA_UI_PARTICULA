@@ -52,6 +52,9 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
 
         #Conectar la señal para su metodo de recorrido con el algoritmo de Prim
         self.ui.actionPrim.triggered.connect(self.recorridoPrim)
+
+        #Conectar la señal para su metodo de recorrido con Kruskal
+        self.ui.actionKruskal.triggered.connect(self. recorridoKruskal)
     
 
     @Slot()
@@ -325,7 +328,7 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
     @Slot()
     def recorridoPrim(self):
         pen = QPen()#crear una pluma, que esta definida en la clase QPen
-        pen.setWidth(2)#Tamaño/anchura de la pluma
+        pen.setWidth(3)#Tamaño/anchura de la pluma
 
         self.ui.salida_grafo.clear()
 
@@ -337,6 +340,9 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
 
         self.ui.salida_grafo.insertPlainText("RECORRIDO -> ALGORITMO DE PRIM\n\n")
         self.ui.salida_grafo.insertPlainText(str)
+
+        color = QColor(245, 0, 135)
+        pen.setColor(color)#Asignarle el color a la variable pluma
         
         #Para dibujar el grafo
         key = (origen_x, origen_y)
@@ -352,14 +358,43 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
                 destino_y = destino[1]
                 # print(destino)
 
-                color = QColor("pink")
-                pen.setColor(color)#Asignarle el color a la variable pluma    
-
-                self.scene.addEllipse(orig_x, orig_y, 3, 3, pen)#En que posicion se va a dibujar (x,y) y el radio (3,3) y la pluma
-                self.scene.addEllipse(destino_x, destino_y, 3, 3, pen)#En que posicion se va a dibujar (x,y) y el radio (3,3) y la pluma
+                self.scene.addEllipse(orig_x, orig_y, 4, 4, pen)#En que posicion se va a dibujar (x,y) y el radio (3,3) y la pluma
+                self.scene.addEllipse(destino_x, destino_y, 4, 4, pen)#En que posicion se va a dibujar (x,y) y el radio (3,3) y la pluma
                 
                 # #Para dibujar una linea para conectar los 2 puntos
-                self.scene.addLine(orig_x+3, orig_y+3,
+                self.scene.addLine(orig_x+2, orig_y+2,
                                     destino_x, destino_y, pen)#Origen en 'x','y' y destino en 'x','y', 
                                                         #el +3 es para dibujar la linea un poco mas abajo
 
+    @Slot()
+    def recorridoKruskal(self):
+        self.ui.salida_grafo.clear()
+
+        recorrido_kruskal = self.contenedor_particulas.recorridoKruskal()
+        str = pformat(recorrido_kruskal, width=40, indent=1)
+
+        self.ui.salida_grafo.insertPlainText("RECORRIDO -> ALGORITMO DE KRUSKAL\n\n")
+        self.ui.salida_grafo.insertPlainText(str)
+
+        pen = QPen()
+        pen.setWidth(3)
+
+        color = QColor(245, 0, 135)
+        pen.setColor(color)
+
+        for key in recorrido_kruskal.keys():
+            orig_x = key[0]
+            orig_y = key[1]
+
+            for values in recorrido_kruskal[key]:
+                destino = values[1]
+                dest_x = destino[0]
+                dest_y = destino[1]
+
+                self.scene.addEllipse(orig_x, orig_y, 4, 4, pen)#En que posicion se va a dibujar (x,y) y el radio (3,3) y la pluma
+                self.scene.addEllipse(dest_x, dest_y, 4, 4, pen)#En que posicion se va a dibujar (x,y) y el radio (3,3) y la pluma
+                
+                # #Para dibujar una linea para conectar los 2 puntos
+                self.scene.addLine(orig_x+2, orig_y+2,
+                                    dest_x, dest_y, pen)#Origen en 'x','y' y destino en 'x','y', 
+                                                        #el +3 es para dibujar la linea un poco mas abajo
