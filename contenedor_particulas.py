@@ -2,6 +2,7 @@ from particula import Particula
 import json
 from pprint import pprint, pformat
 from queue import PriorityQueue
+from disjoint import DisjointSet
 
 class Contenedor_particulas:
     def __init__(self):
@@ -113,7 +114,7 @@ class Contenedor_particulas:
 
         return grafo
 
-    #Metodo para poder hacer el recorrido para los grafos
+    #Metodo para poder hacer el grafo para los recorridos
     def DiccionarioRecorridos(self):
         grafo = dict()
 
@@ -137,6 +138,34 @@ class Contenedor_particulas:
 
 
         return grafo
+
+    #Meodo para hacer el grafo de velocidades
+    def DiccionarioVelocidades(self):
+        grafoVel = dict()
+
+        for particula in self.__particulas:
+
+            arista_origen = (int(particula.velocidad), particula.destino_x, particula.destino_y)
+            # arista_destino = (int(particula.velocidad), particula.origen_x, particula.origen_y)
+
+            key_origen = (particula.origen_x, particula.origen_y)
+            # key_destino = (particula.destino_x, particula.destino_y)
+
+            if key_origen in grafoVel:
+                grafoVel[(particula.origen_x, particula.origen_y)].append(arista_origen)
+            else:
+                grafoVel[(particula.origen_x, particula.origen_y)] = [arista_origen]
+            
+            # if key_destino in grafoVel:
+            #     grafoVel[(particula.destino_x, particula.destino_y)].append(arista_destino)
+            # else:
+            #     grafoVel[(particula.destino_x, particula.destino_y)] = [arista_destino]
+        
+        
+        # str = pformat(grafoVel, width=40, indent=1)
+        # print(str)
+
+        return grafoVel
 
     #Metodo para realizar el recorrido por profundidad en el grafo
     def RecorreProfundidad(self, grafo, x, y):
@@ -280,3 +309,54 @@ class Contenedor_particulas:
 
         return prim
             
+    def recorridoKruskal(self):
+        grafoV = Contenedor_particulas.DiccionarioVelocidades(self)
+        grafoNormal = Contenedor_particulas.Diccionario(self)
+        Kruskal = dict()#Se define el grafo resultante
+
+        #Se define una cola de prioridad (Lista ordenada)
+        colaP = PriorityQueue()
+
+        for orig in grafoV.keys():
+            for value in grafoV[orig]:
+                vel = value[0]*-1
+                dest = (value[1], value[2])
+
+                formato = (vel, orig, dest)
+                colaP.put(formato) #Entra a la cola de prioridad
+
+        lista = []
+        #definicion del disjoint set
+        for key in grafoNormal.keys():
+            lista.append(key)
+        #make set
+        ds = DisjointSet(lista)
+
+        #mientras la lista ordenada no este vacia
+        while not colaP.empty():
+            print(ds.get())
+            #Tomar la arista con el menor tiempo de la lista ordenada y eliminar
+            arista = colaP.get()
+            origenREAL = arista[1]
+            destinoREAL = arista[2]
+
+            print("Arista: ", arista)
+            aristaDestino = (arista[0], arista[2])
+            
+            #si la tupla origen y la tupla destino no estan en el mismo "set" de todo el disjoint set
+            if ds.find(origenREAL) != ds.find(destinoREAL):
+                #agregar la arista al grafo resultante
+                if origenREAL in Kruskal:
+                    Kruskal[origenREAL].append(aristaDestino)
+                else:
+                    Kruskal[origenREAL] = [aristaDestino]
+
+                #unir los conjuntos donde se encuentren el OrigenREAL, y el DestinoREAL
+                ds.union(origenREAL, destinoREAL)
+
+        print(ds.get())
+        print("\n\nRecorrido de Kruskal")
+        pprint(Kruskal)
+        
+        return Kruskal
+    
