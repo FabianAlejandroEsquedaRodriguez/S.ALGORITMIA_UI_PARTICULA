@@ -306,6 +306,7 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
         texto = self.contenedor_particulas.Diccionario()
 
         str = pformat(texto, width=40, indent=1)
+        print(str)#Imprime el grafo en la terminal
         self.ui.salida_grafo.insertPlainText(str)
         
         self.dibujar()
