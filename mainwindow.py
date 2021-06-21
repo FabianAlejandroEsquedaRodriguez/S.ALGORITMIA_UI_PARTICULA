@@ -257,7 +257,7 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
     @Slot()
     def dibujar(self):
         pen = QPen()#crear una pluma, que esta definida en la clase QPen
-        pen.setWidth(2)#Tamaño/anchura de la pluma
+        pen.setWidth(3)#Tamaño/anchura de la pluma
 
         for particula in self.contenedor_particulas:
             #Ponerle color a la puma
@@ -279,7 +279,7 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
             self.scene.addEllipse(destino_x, destino_y, 3, 3, pen)#En que posicion se va a dibujar (x,y) y el radio (3,3) y la pluma
             
             #Para dibujar una linea para conectar los 2 puntos
-            self.scene.addLine(origen_x+3, origen_y+3,
+            self.scene.addLine(origen_x+2, origen_y+2,
                                 destino_x, destino_y, pen)#Origen en 'x','y' y destino en 'x','y', 
                                                             #el +3 es para dibujar la linea un poco mas abajo 
 
