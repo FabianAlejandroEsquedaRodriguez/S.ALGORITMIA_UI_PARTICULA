@@ -335,15 +335,15 @@
           <x>10</x>
           <y>30</y>
           <width>171</width>
-          <height>281</height>
+          <height>221</height>
          </rect>
         </property>
        </widget>
        <widget class="QLabel" name="label_12">
         <property name="geometry">
          <rect>
-          <x>20</x>
-          <y>320</y>
+          <x>10</x>
+          <y>260</y>
           <width>61</width>
           <height>16</height>
          </rect>
@@ -355,8 +355,8 @@
        <widget class="QLabel" name="label_13">
         <property name="geometry">
          <rect>
-          <x>20</x>
-          <y>350</y>
+          <x>10</x>
+          <y>290</y>
           <width>61</width>
           <height>16</height>
          </rect>
@@ -369,7 +369,7 @@
         <property name="geometry">
          <rect>
           <x>80</x>
-          <y>320</y>
+          <y>260</y>
           <width>101</width>
           <height>22</height>
          </rect>
@@ -379,6 +379,58 @@
         </property>
        </widget>
        <widget class="QSpinBox" name="orig_y_spinBox">
+        <property name="geometry">
+         <rect>
+          <x>80</x>
+          <y>290</y>
+          <width>101</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="maximum">
+         <number>500</number>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_14">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>320</y>
+          <width>61</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>DESTINO X:</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_15">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>350</y>
+          <width>61</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>DESTINO Y:</string>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="dest_x_spinBox">
+        <property name="geometry">
+         <rect>
+          <x>80</x>
+          <y>320</y>
+          <width>101</width>
+          <height>22</height>
+         </rect>
+        </property>
+        <property name="maximum">
+         <number>500</number>
+        </property>
+       </widget>
+       <widget class="QSpinBox" name="dest_y_spinBox">
         <property name="geometry">
          <rect>
           <x>80</x>
@@ -419,6 +471,7 @@
     <addaction name="actionAmplitud_Profundidad"/>
     <addaction name="actionPrim"/>
     <addaction name="actionKruskal"/>
+    <addaction name="actionDijkstra"/>
    </widget>
    <addaction name="menuArchivo"/>
    <addaction name="menuRecorridos"/>
@@ -462,6 +515,14 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+K</string>
+   </property>
+  </action>
+  <action name="actionDijkstra">
+   <property name="text">
+    <string>Dijkstra</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+D</string>
    </property>
   </action>
  </widget>
