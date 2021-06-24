@@ -423,7 +423,7 @@ class Contenedor_particulas:
                     nodoNUEVO = (distanciaREAL, nodo)
                     colaP.put(nodoNUEVO)
 
-        print("\n")
+        print("\nDISTANCIAS\n")
         pprint(distancias, width=35, indent=1)
         print("\n\nCAMINO:\n")
         pprint(camino, width=35, indent=1)
