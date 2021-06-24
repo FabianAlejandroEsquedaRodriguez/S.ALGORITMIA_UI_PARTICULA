@@ -54,7 +54,10 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
         self.ui.actionPrim.triggered.connect(self.recorridoPrim)
 
         #Conectar la señal para su metodo de recorrido con Kruskal
-        self.ui.actionKruskal.triggered.connect(self. recorridoKruskal)
+        self.ui.actionKruskal.triggered.connect(self.recorridoKruskal)
+
+        #Conectar la señal para su metodo de recorrido dijkstra
+        self.ui.actionDijkstra.triggered.connect(self.recorridoDijkstra)
     
 
     @Slot()
@@ -399,3 +402,57 @@ class MainWindow(QMainWindow):#Clase Mainwindow que hereda desde QMainWindow
                 self.scene.addLine(orig_x+2, orig_y+2,
                                     dest_x, dest_y, pen)#Origen en 'x','y' y destino en 'x','y', 
                                                         #el +3 es para dibujar la linea un poco mas abajo
+
+    @Slot()
+    def recorridoDijkstra(self):
+        self.ui.salida_grafo.clear()
+        self.scene.clear()
+        
+        pen = QPen()
+        pen.setWidth(3)
+
+        color = QColor(245, 0, 135)
+        pen.setColor(color)
+
+        orig_x = self.ui.orig_x_spinBox.value()
+        orig_y = self.ui.orig_y_spinBox.value()
+        dest_x = self.ui.dest_x_spinBox.value()
+        dest_y = self.ui.dest_y_spinBox.value()
+
+        recorrido_Dijkstra = self.contenedor_particulas.recorridoDijkstra(orig_x, orig_y)
+
+        str = pformat(recorrido_Dijkstra, width=40, indent=1)
+
+        self.ui.salida_grafo.insertPlainText("RECORRIDO (CAMINO) -> ALGORITMO DE DIJKSTRA\n\n")
+        self.ui.salida_grafo.insertPlainText(str)
+
+
+        origenDIJ = (dest_x, dest_y)#El destino es a partir de donde va a iniciar a dibujar
+        destinoDIJ = (orig_x, orig_y)#hasta llegar al origen
+
+        ady = recorrido_Dijkstra.get(origenDIJ)
+
+        or_x = origenDIJ[0]#Elorigen x, va a ser el destino x
+        or_y = origenDIJ[1]#El origen y, va a ser el destino y
+
+        dest_x = ady[0]
+        dest_y = ady[1]
+
+        self.scene.addEllipse(or_x, or_y, 4, 4, pen)
+        self.scene.addEllipse(dest_x, dest_y, 4, 4, pen)
+        self.scene.addLine(or_x+2, or_y+2, dest_x, dest_y, pen)
+
+        while destinoDIJ != ady:
+            nuevoDestino = (dest_x, dest_y)
+            or_x = nuevoDestino[0]
+            or_y = nuevoDestino[1]
+
+            ady = recorrido_Dijkstra.get(nuevoDestino)
+
+
+            dest_x = ady[0]
+            dest_y = ady[1]
+
+            self.scene.addEllipse(or_x, or_y, 4, 4, pen)
+            self.scene.addEllipse(dest_x, dest_y, 4, 4, pen)
+            self.scene.addLine(or_x+2, or_y+2, dest_x, dest_y, pen)
