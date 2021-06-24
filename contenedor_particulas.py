@@ -1,3 +1,4 @@
+from algoritmos import distancia_euclidiana
 from particula import Particula
 import json
 from pprint import pprint, pformat
@@ -360,3 +361,72 @@ class Contenedor_particulas:
 
         return Kruskal
     
+    def recorridoDijkstra(self, origen_x, origen_y):
+        GrafoInicial = Contenedor_particulas.Diccionario(self)
+
+        #Se construye un arreglo (diccionario) de distancias
+        distancias = {}
+        #Se crea otro arreglo (diccionario) para guardar el camino
+        camino = {}
+        #Se crea una cola de prioridad y se mete el nodo origen.
+        colaP = PriorityQueue()
+
+        #En la posicion del nodo origen se coloca el valor 0
+        origen = (origen_x, origen_y)
+        distancias[origen] = 0
+
+        infinito = float('inf')
+        #Mientras que en las demas posiciones el valor es infinito
+        for key in GrafoInicial.keys():
+            if (origen_x, origen_y) != key:
+                distancias[key] = infinito
+
+        v = distancias.get(origen)#Obtenemos el nodo origen desde el Diccionario
+
+        nodoORIGINAL = (v, origen)
+
+        colaP.put(nodoORIGINAL)
+
+        #Mientras colaP no este vacia:
+        while not colaP.empty():
+            #se extrae el primer elemento (N) de la colaP
+            arista = colaP.get()
+            origenREAL = arista[1]
+        
+            #Por cada arista del nodo (N) recien salido, hacer:
+            for adyacente in GrafoInicial[origenREAL]:
+                distanciaAlNodo = adyacente[2]
+                distanciaGuardada = arista[0]
+
+                distanciaREAL = distanciaAlNodo + distanciaGuardada#Se suma la distancia hacia el nodo destino
+                                                            #mas la distancia almacenada en el diccionario de distancias
+
+                nodo = (adyacente[0], adyacente[1])#Accedemos al valor en esa posicion
+
+                distENarreglo = distancias.get(nodo)#Obtenemos el nodo desde el Diccionario
+
+                #Si la distancia hacia el nodo destino + la distancia almacenada del arreglo distancias
+                #es menor que la distancia en el arreglo de distancias
+                if (distanciaREAL < distENarreglo):
+                    #Se coloca la nueva distancia en el arreglo de distancias
+                    distancias[nodo] = distanciaREAL
+
+                    #En el arreglo de camino se agrega en la posicion del nodo destino 
+                    #la conexion padre del nodo n extraido
+                    if not origenREAL in camino:
+                        camino[origenREAL] = nodo
+
+                    if not nodo in camino:
+                        camino[nodo] = origenREAL
+
+                    #Se agrega a la lista ordenada el nodo destino con la nueva distancia
+                    nodoNUEVO = (distanciaREAL, nodo)
+                    colaP.put(nodoNUEVO)
+
+        print("\n")
+        pprint(distancias, width=35, indent=1)
+        print("\n\nCAMINO:\n")
+        pprint(camino, width=35, indent=1)
+        print("\n")
+
+        return camino
